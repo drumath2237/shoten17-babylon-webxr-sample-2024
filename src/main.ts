@@ -11,4 +11,3 @@ const main = () => {
 };
 
 main();
-
