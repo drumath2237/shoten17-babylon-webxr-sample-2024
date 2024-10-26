@@ -11,6 +11,7 @@
   "devDependencies": {
     "@babylonjs/core": "^7.31.0",
     "@biomejs/biome": "^1.9.4",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "typescript": "~5.6.2",
     "vite": "^5.4.9"
   }
