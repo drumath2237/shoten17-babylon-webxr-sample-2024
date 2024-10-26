@@ -13,7 +13,7 @@ const main = () => {
 
   scene.createDefaultCameraOrLight(true, true, true);
 
-  const box = MeshBuilder.CreateBox("box", { size: 0.5 });
+  MeshBuilder.CreateBox("box", { size: 0.5 });
 
   engine.runRenderLoop(() => scene.render());
   window.addEventListener("resize", () => engine.resize());
