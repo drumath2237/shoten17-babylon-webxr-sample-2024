@@ -1,6 +1,7 @@
 import "./style.css";
 import {
   Engine,
+  type IWebXRPlane,
   type Mesh,
   MeshBuilder,
   PolygonMeshBuilder,
@@ -9,6 +10,8 @@ import {
   WebXRFeatureName,
   type WebXRPlaneDetector,
 } from "@babylonjs/core";
+
+import earcut from "earcut";
 
 const main = async () => {
   const renderCanvas =
@@ -39,32 +42,26 @@ const main = async () => {
 
   const planeMap = new Map<number, Mesh>();
 
-  planeDetector.onPlaneAddedObservable.add(
-    ({ id, polygonDefinition, transformationMatrix }) => {
-      const meshBuilder = new PolygonMeshBuilder(
-        "builder",
-        polygonDefinition.map((v) => new Vector2(v.x, v.z)),
-        scene,
-      );
-      const mesh = meshBuilder.build(false, 0.01);
-      transformationMatrix.decomposeToTransformNode(mesh);
-      planeMap.set(id, mesh);
-    },
-  );
+  const updatePlaneMapCallback = ({
+    id,
+    polygonDefinition,
+    transformationMatrix,
+  }: IWebXRPlane) => {
+    const meshBuilder = new PolygonMeshBuilder(
+      "builder",
+      polygonDefinition.map((v) => new Vector2(v.x, v.z)),
+      scene,
+      earcut,
+    );
+    const mesh = meshBuilder.build(false, 0.01);
+    transformationMatrix.decomposeToTransformNode(mesh);
 
-  planeDetector.onPlaneUpdatedObservable.add(
-    ({ id, polygonDefinition, transformationMatrix }) => {
-      const meshBuilder = new PolygonMeshBuilder(
-        "builder",
-        polygonDefinition.map((v) => new Vector2(v.x, v.z)),
-        scene,
-      );
-      const mesh = meshBuilder.build(false, 0.01);
-      transformationMatrix.decomposeToTransformNode(mesh);
-      planeMap.set(id, mesh);
-    },
-  );
+    planeMap.get(id)?.dispose();
+    planeMap.set(id, mesh);
+  };
 
+  planeDetector.onPlaneAddedObservable.add(updatePlaneMapCallback);
+  planeDetector.onPlaneUpdatedObservable.add(updatePlaneMapCallback);
   planeDetector.onPlaneRemovedObservable.add(({ id }) => {
     planeMap.get(id)?.dispose();
     planeMap.delete(id);
