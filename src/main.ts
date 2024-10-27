@@ -31,6 +31,7 @@ const main = async () => {
     uiOptions: {
       sessionMode: "immersive-ar",
       requiredFeatures: ["plane-detection"],
+      referenceSpaceType: "unbounded",
     },
   });
 
