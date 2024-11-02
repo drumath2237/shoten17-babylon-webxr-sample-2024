@@ -1,1 +1,14 @@
-# shoten17-babylon-webxr-sample-2024
+# 『ViteとBabylon.js 7ではじめるWebXRアプリ開発』サンプルコード
+
+## About
+
+技術書典17にて頒布した『[ViteとBabylon.js 7ではじめるWebXRアプリ開発](https://techbookfest.org/product/8Dhb1NAL7wtmT0HMZay1PM)』のサンプルコードです。
+
+## Environment
+
+- Node.js 20
+- Babylon.js 7.31.0
+
+## Contact
+
+[@drumath2237](https://x.com/ninisan_drumath)
