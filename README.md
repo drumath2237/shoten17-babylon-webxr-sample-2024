@@ -9,6 +9,18 @@
 - Node.js 20
 - Babylon.js 7.31.0
 
+## Usage
+
+```sh
+pnpm i
+
+# run dev server
+pnpm dev --host
+
+# build
+pnpm build
+```
+
 ## Contact
 
 [@drumath2237](https://x.com/ninisan_drumath)

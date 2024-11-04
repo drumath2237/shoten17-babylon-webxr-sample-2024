@@ -25,7 +25,7 @@ const main = async () => {
 
   scene.createDefaultCameraOrLight(true, true, true);
 
-  MeshBuilder.CreateBox("box", { size: 0.5 });
+  const box = MeshBuilder.CreateBox("box", { size: 0.5 });
 
   const xr = await scene.createDefaultXRExperienceAsync({
     uiOptions: {
